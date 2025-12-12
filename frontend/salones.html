@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Salones de Eventos - TuSalón</title>
+    <meta name="description"
+        content="Encontrá los mejores salones para tu evento. Comparáprecios, capacidad y ubicación.">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-content">
+                <a href="index.html" class="logo">
+                    <span class="logo-text">TuSalón</span>
+                </a>
+                <ul class="nav-menu">
+                    <li><a href="salones.html" style="color: var(--color-gold);">Salones</a></li>
+                    <li><a href="servicios.html">Servicios</a></li>
+                    <li><a href="index.html#about">Nosotros</a></li>
+                    <li><a href="index.html#contact">Contacto</a></li>
+                </ul>
+                <div class="nav-actions">
+                    <button class="btn btn-outline">Ingresar</button>
+                    <button class="btn btn-primary">Publicar</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1 class="page-title">Salones de Eventos</h1>
+            <p class="page-subtitle">Descubrí el espacio perfecto para tu celebración</p>
+        </div>
+    </section>
+
+    <!-- Venues Listing -->
+    <section class="venues-listing">
+        <div class="container">
+            <div class="venues-grid" id="venuesContainer">
+                <div class="loading">Cargando salones...</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3 class="footer-title">TuSalón</h3>
+                    <p class="footer-text">La plataforma líder para encontrar salones de eventos y servicios
+                        profesionales en Argentina.</p>
+                </div>
+
+                <div class="footer-column">
+                    <h4 class="footer-heading">Explorá</h4>
+                    <ul class="footer-links">
+                        <li><a href="salones.html">Salones</a></li>
+                        <li><a href="servicios.html">Servicios</a></li>
+                        <li><a href="index.html#about">Nosotros</a></li>
+                        <li><a href="index.html#contact">Contacto</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-column">
+                    <h4 class="footer-heading">Para Proveedores</h4>
+                    <ul class="footer-links">
+                        <li><a href="#publish">Publicar Salón</a></li>
+                        <li><a href="#publish">Publicar Servicio</a></li>
+                        <li><a href="#pricing">Planes</a></li>
+                        <li><a href="#faq">Preguntas Frecuentes</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-column">
+                    <h4 class="footer-heading">Legal</h4>
+                    <ul class="footer-links">
+                        <li><a href="#privacy">Privacidad</a></li>
+                        <li><a href="#terms">Términos</a></li>
+                        <li><a href="#cookies">Cookies</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2024 TuSalón. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script>
+        // Load venues with URL parameters
+        document.addEventListener('DOMContentLoaded', () => {
+            const filters = getUrlParams();
+            loadAllVenues(filters);
+        });
+    </script>
+</body>
+
+</html>

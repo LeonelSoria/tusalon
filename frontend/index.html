@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TuSalón - Encontrá el lugar perfecto para tu evento</title>
+    <meta name="description" content="Plataforma para encontrar salones de eventos y servicios profesionales. Fotografía, DJ, catering y más.">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-content">
+                <a href="index.html" class="logo">
+                    <span class="logo-text">TuSalón</span>
+                </a>
+                <ul class="nav-menu">
+                    <li><a href="salones.html">Salones</a></li>
+                    <li><a href="servicios.html">Servicios</a></li>
+                    <li><a href="#about">Nosotros</a></li>
+                    <li><a href="#contact">Contacto</a></li>
+                </ul>
+                <div class="nav-actions">
+                    <button class="btn btn-outline">Ingresar</button>
+                    <button class="btn btn-primary">Publicar</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <h1 class="hero-title">Encontrá el lugar perfecto<br>para tu evento soñado</h1>
+            <p class="hero-subtitle">Descubrí los mejores salones, proveedores y servicios para hacer realidad tu celebración</p>
+            
+            <!-- Search Box -->
+            <div class="search-box">
+                <div class="search-tabs">
+                    <button class="search-tab active" data-tab="salones">
+                        <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
+                        </svg>
+                        Salones
+                    </button>
+                    <button class="search-tab" data-tab="servicios">
+                        <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                        </svg>
+                        Servicios
+                    </button>
+                </div>
+                
+                <form class="search-form" id="searchForm">
+                    <div class="search-inputs">
+                        <div class="input-group">
+                            <svg class="input-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                            </svg>
+                            <input type="text" placeholder="Ciudad o ubicación" id="searchLocation" class="search-input">
+                        </div>
+                        
+                        <div class="input-group" id="capacityInput">
+                            <svg class="input-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                            </svg>
+                            <input type="number" placeholder="Capacidad (invitados)" id="searchCapacity" class="search-input">
+                        </div>
+                        
+                        <div class="input-group hidden" id="serviceTypeInput">
+                            <svg class="input-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                            </svg>
+                            <select id="searchServiceType" class="search-input">
+                                <option value="">Tipo de servicio</option>
+                                <option value="fotografia">Fotografía</option>
+                                <option value="dj">DJ</option>
+                                <option value="wedding_planner">Wedding Planner</option>
+                                <option value="catering">Catering</option>
+                                <option value="decoracion">Decoración</option>
+                                <option value="musica">Música</option>
+                                <option value="video">Video</option>
+                                <option value="flores">Flores</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <button type="submit" class="btn-search">
+                        <svg class="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                        </svg>
+                        Buscar
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Categories Section -->
+    <section class="categories">
+        <div class="container">
+            <h2 class="section-title">Categorías Destacadas</h2>
+            <p class="section-subtitle">Encontrá todo lo que necesitás para tu evento</p>
+            
+            <div class="categories-grid">
+                <a href="salones.html" class="category-card">
+                    <div class="category-icon">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
+                        </svg>
+                    </div>
+                    <h3>Salones de Eventos</h3>
+                    <p>Encontrá el espacio perfecto</p>
+                </a>
+                
+                <a href="servicios.html?tipo=fotografia" class="category-card">
+                    <div class="category-icon">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"></path>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                        </svg>
+                    </div>
+                    <h3>Fotografía</h3>
+                    <p>Capturá cada momento especial</p>
+                </a>
+                
+                <a href="servicios.html?tipo=catering" class="category-card">
+                    <div class="category-icon">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+                        </svg>
+                    </div>
+                    <h3>Catering</h3>
+                    <p>Gastronomía de excelencia</p>
+                </a>
+                
+                <a href="servicios.html?tipo=dj" class="category-card">
+                    <div class="category-icon">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3"></path>
+                        </svg>
+                    </div>
+                    <h3>DJ & Música</h3>
+                    <p>Animate tu celebración</p>
+                </a>
+                
+                <a href="servicios.html?tipo=wedding_planner" class="category-card">
+                    <div class="category-icon">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"></path>
+                        </svg>
+                    </div>
+                    <h3>Wedding Planner</h3>
+                    <p>Organizamos tu evento ideal</p>
+                </a>
+                
+                <a href="servicios.html?tipo=decoracion" class="category-card">
+                    <div class="category-icon">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"></path>
+                        </svg>
+                    </div>
+                    <h3>Decoración</h3>
+                    <p>Ambientación única y elegante</p>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Venues -->
+    <section class="featured">
+        <div class="container">
+            <div class="section-header">
+                <div>
+                    <h2 class="section-title">Salones Destacados</h2>
+                    <p class="section-subtitle">Los espacios más elegantes y exclusivos</p>
+                </div>
+                <a href="salones.html" class="btn btn-outline">Ver todos</a>
+            </div>
+            
+            <div class="venues-grid" id="featuredVenues">
+                <!-- Venues will be loaded here dynamically -->
+                <div class="loading">Cargando salones...</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta">
+        <div class="container">
+            <div class="cta-content">
+                <h2 class="cta-title">¿Tenés un salón o ofrecés servicios?</h2>
+                <p class="cta-subtitle">Publicá gratis y conectá con miles de personas buscando proveedores como vos</p>
+                <button class="btn btn-gold btn-large">Comenzar ahora</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3 class="footer-title">TuSalón</h3>
+                    <p class="footer-text">La plataforma líder para encontrar salones de eventos y servicios profesionales en Argentina.</p>
+                </div>
+                
+                <div class="footer-column">
+                    <h4 class="footer-heading">Explorá</h4>
+                    <ul class="footer-links">
+                        <li><a href="salones.html">Salones</a></li>
+                        <li><a href="servicios.html">Servicios</a></li>
+                        <li><a href="#about">Nosotros</a></li>
+                        <li><a href="#contact">Contacto</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h4 class="footer-heading">Para Proveedores</h4>
+                    <ul class="footer-links">
+                        <li><a href="#publish">Publicar Salón</a></li>
+                        <li><a href="#publish">Publicar Servicio</a></li>
+                        <li><a href="#pricing">Planes</a></li>
+                        <li><a href="#faq">Preguntas Frecuentes</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h4 class="footer-heading">Legal</h4>
+                    <ul class="footer-links">
+                        <li><a href="#privacy">Privacidad</a></li>
+                        <li><a href="#terms">Términos</a></li>
+                        <li><a href="#cookies">Cookies</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2024 TuSalón. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+</html>
