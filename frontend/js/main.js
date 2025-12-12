@@ -111,7 +111,7 @@ function createVenueCard(salon) {
         `<div style="width: 100%; height: 100%; background: linear-gradient(135deg, #E5E5E5 0%, #6B6B6B 100%); display: flex; align-items: center; justify-content: center; color: white; font-size: 1.5rem; font-weight: 600;">${salon.nombre.substring(0, 2)}</div>`;
 
     return `
-        <div class="venue-card">
+        <a href="salon-detalle.html?id=${salon.id}" class="venue-card" style="text-decoration: none; color: inherit;">
             <div class="venue-image">
                 ${imagenHtml}
             </div>
@@ -139,7 +139,7 @@ function createVenueCard(salon) {
                     <span class="venue-price-label">desde</span>
                 </div>
             </div>
-        </div>
+        </a>
     `;
 }
 
