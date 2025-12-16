@@ -1,20 +1,25 @@
 /* ========================================
    TuSalón - Premium Styles
-   Colors: White, Black, Gold
+   Brand Colors: Orange, Gray, White
    ======================================== */
 
 :root {
-    /* Color Palette - Premium Gold, White, Black */
-    --color-gold: #D4AF37;
-    --color-gold-light: #F5E6C8;
-    --color-gold-dark: #B8941F;
+    /* Color Palette - Brand Colors */
+    --color-orange: #D97706;
+    --color-orange-light: #FCD34D;
+    --color-orange-dark: #B45309;
     --color-black: #000000;
-    --color-charcoal: #1A1A1A;
-    --color-gray-dark: #2D2D2D;
-    --color-gray: #6B6B6B;
-    --color-gray-light: #E5E5E5;
+    --color-charcoal: #1F2937;
+    --color-gray-dark: #374151;
+    --color-gray: #6B7280;
+    --color-gray-light: #E5E7EB;
     --color-white: #FFFFFF;
-    --color-cream: #FAFAF8;
+    --color-cream: #F9FAFB;
+
+    /* Legacy aliases for backward compatibility */
+    --color-gold: var(--color-orange);
+    --color-gold-light: var(--color-orange-light);
+    --color-gold-dark: var(--color-orange-dark);
 
     /* Typography */
     --font-heading: 'Playfair Display', serif;
@@ -32,7 +37,8 @@
     --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.1);
     --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.15);
     --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.2);
-    --shadow-gold: 0 4px 16px rgba(212, 175, 55, 0.2);
+    --shadow-orange: 0 4px 16px rgba(217, 119, 6, 0.2);
+    --shadow-gold: var(--shadow-orange);
 
     /* Border Radius */
     --radius-sm: 4px;
@@ -140,16 +146,20 @@ textarea {
     height: 80px;
 }
 
-.logo-text {
-    font-family: var(--font-heading);
-    font-size: 1.75rem;
-    font-weight: 700;
-    color: var(--color-black);
-    letter-spacing: 0.5px;
+.logo {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
 }
 
-.logo-text::first-letter {
-    color: var(--color-gold);
+.logo img {
+    height: 50px;
+    width: auto;
+    transition: var(--transition-fast);
+}
+
+.logo:hover img {
+    transform: scale(1.05);
 }
 
 .nav-menu {
