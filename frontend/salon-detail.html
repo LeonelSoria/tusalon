@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalle del Salón - TuSalón</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <a href="index.html" class="logo">TuSalón</a>
+            <div class="nav-links">
+                <a href="index.html">Inicio</a>
+                <a href="salones.html">Salones</a>
+                <a href="servicios.html">Servicios</a>
+            </div>
+            <div class="nav-actions">
+                <a href="login.html" class="btn btn-outline">Ingresar</a>
+                <a href="register.html" class="btn btn-primary">Registrarse</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="detail-hero">
+        <div class="container">
+            <a href="salones.html" class="back-link">
+                <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                </svg>
+                Volver a Salones
+            </a>
+            <h1 id="salonName" class="detail-title">Cargando...</h1>
+            <div id="salonLocation" class="detail-subtitle"></div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <section class="detail-content">
+        <div class="container">
+            <div class="detail-grid">
+                <!-- Left Column: Images & Details -->
+                <div class="detail-main">
+                    <!-- Image Gallery -->
+                    <div class="image-gallery" id="imageGallery">
+                        <div class="gallery-main">
+                            <img id="mainImage" src="" alt="Imagen del salón">
+                            <button class="gallery-nav gallery-prev" onclick="previousImage()">
+                                <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M15 19l-7-7 7-7"></path>
+                                </svg>
+                            </button>
+                            <button class="gallery-nav gallery-next" onclick="nextImage()">
+                                <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M9 5l7 7-7 7"></path>
+                                </svg>
+                            </button>
+                        </div>
+                        <div class="gallery-thumbnails" id="thumbnails"></div>
+                    </div>
+
+                    <!-- Description -->
+                    <div class="detail-section">
+                        <h2>Descripción</h2>
+                        <p id="salonDescription"></p>
+                    </div>
+
+                    <!-- Features -->
+                    <div class="detail-section">
+                        <h2>Características</h2>
+                        <div class="features-grid" id="featuresGrid">
+                            <div class="feature-item">
+                                <svg class="feature-icon" width="24" height="24" fill="none" stroke="currentColor"
+                                    viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z">
+                                    </path>
+                                </svg>
+                                <span>
+                                    <strong>Capacidad:</strong>
+                                    <span id="salonCapacity"></span> personas
+                                </span>
+                            </div>
+                            <div class="feature-item">
+                                <svg class="feature-icon" width="24" height="24" fill="none" stroke="currentColor"
+                                    viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z">
+                                    </path>
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                </svg>
+                                <span id="salonAddress"></span>
+                            </div>
+                        </div>
+                        <div id="serviciosIncluidos" class="services-included" style="margin-top: 1.5rem;"></div>
+                    </div>
+
+                    <!-- Location Map -->
+                    <div class="detail-section">
+                        <h2>Ubicación</h2>
+                        <div id="mapContainer" class="map-container">
+                            <div class="map-placeholder">
+                                <svg width="48" height="48" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z">
+                                    </path>
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                </svg>
+                                <p>Mapa de ubicación</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Column: Booking Card -->
+                <div class="detail-sidebar">
+                    <div class="booking-card">
+                        <div class="price-section">
+                            <span class="price-label">Precio desde</span>
+                            <span class="price" id="salonPrice"></span>
+                        </div>
+
+                        <div class="divider"></div>
+
+                        <!-- Provider Info -->
+                        <div class="provider-info">
+                            <h3>Proveedor</h3>
+                            <div id="proveedorInfo" class="provider-details"></div>
+                        </div>
+
+                        <div class="divider"></div>
+
+                        <!-- Contact Form -->
+                        <div class="contact-section">
+                            <h3>Enviar Consulta</h3>
+                            <form id="inquiryForm" class="inquiry-form">
+                                <div class="form-group">
+                                    <label for="eventDate">Fecha del Evento</label>
+                                    <input type="date" id="eventDate" name="eventDate" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="guestCount">Número de Invitados</label>
+                                    <input type="number" id="guestCount" name="guestCount" min="1" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="message">Mensaje</label>
+                                    <textarea id="message" name="message" rows="4"
+                                        placeholder="Escribe tu consulta aquí..."></textarea>
+                                </div>
+                                <button type="submit" class="btn btn-primary btn-block">
+                                    Enviar Consulta
+                                </button>
+                            </form>
+                        </div>
+
+                        <!-- Add to Favorites -->
+                        <button id="favoriteBtn" class="btn btn-outline btn-block" style="margin-top: 1rem;">
+                            <svg id="heartIcon" width="20" height="20" fill="none" stroke="currentColor"
+                                viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z">
+                                </path>
+                            </svg>
+                            <span id="favoriteText">Agregar a Favoritos</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 TuSalón. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <script src="js/auth.js"></script>
+    <script src="js/main.js"></script>
+    <script>
+        const API_URL = 'http://localhost:3000/api/v1';
+        let currentSalon = null;
+        let currentImageIndex = 0;
+        let images = [];
+
+        // Get salon ID from URL
+        function getSalonId() {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get('id');
+        }
+
+        // Load salon details
+        async function loadSalonDetails() {
+            const salonId = getSalonId();
+
+            if (!salonId) {
+                alert('ID de salón no especificado');
+                window.location.href = 'salones.html';
+                return;
+            }
+
+            try {
+                const response = await fetch(`${API_URL}/salones/${salonId}`);
+                const result = await response.json();
+
+                if (!result.success) {
+                    throw new Error(result.error || 'Error al cargar el salón');
+                }
+
+                currentSalon = result.data;
+                displaySalonDetails(currentSalon);
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Error al cargar los detalles del salón');
+                window.location.href = 'salones.html';
+            }
+        }
+
+        // Display salon details
+        function displaySalonDetails(salon) {
+            // Title and location
+            document.getElementById('salonName').textContent = salon.nombre;
+            document.getElementById('salonLocation').textContent = `${salon.ciudad}, ${salon.provincia}`;
+
+            // Images
+            images = salon.imagenes ? JSON.parse(salon.imagenes) : ['https://via.placeholder.com/800x600?text=Sin+imagen'];
+            displayImages();
+
+            // Description
+            document.getElementById('salonDescription').textContent = salon.descripcion || 'Sin descripción disponible';
+
+            // Capacity
+            document.getElementById('salonCapacity').textContent = salon.capacidad || 'N/A';
+
+            // Address
+            document.getElementById('salonAddress').textContent = `${salon.direccion}, ${salon.ciudad}, ${salon.provincia}`;
+
+            // Services included
+            if (salon.serviciosIncluidos) {
+                const servicios = JSON.parse(salon.serviciosIncluidos);
+                document.getElementById('serviciosIncluidos').innerHTML = `
+                    <strong>Servicios incluidos:</strong>
+                    <ul class="services-list">
+                        ${servicios.map(s => `<li>${s}</li>`).join('')}
+                    </ul>
+                `;
+            }
+
+            // Price
+            const precio = salon.precioDesde ? `$${parseInt(salon.precioDesde).toLocaleString('es-AR')}` : 'Consultar';
+            document.getElementById('salonPrice').textContent = precio;
+
+            // Provider info
+            if (salon.proveedor) {
+                document.getElementById('proveedorInfo').innerHTML = `
+                    <p><strong>${salon.proveedor.nombre} ${salon.proveedor.apellido || ''}</strong></p>
+                    <p>${salon.proveedor.email}</p>
+                    ${salon.proveedor.telefono ? `<p>${salon.proveedor.telefono}</p>` : ''}
+                `;
+            }
+        }
+
+        // Display images in gallery
+        function displayImages() {
+            if (images.length === 0) return;
+
+            const mainImage = document.getElementById('mainImage');
+            mainImage.src = images[currentImageIndex];
+
+            const thumbnails = document.getElementById('thumbnails');
+            thumbnails.innerHTML = images.map((img, index) => `
+                <img src="${img}" alt="Imagen ${index + 1}" 
+                     class="${index === currentImageIndex ? 'active' : ''}"
+                     onclick="setCurrentImage(${index})">
+            `).join('');
+        }
+
+        // Navigate images
+        function previousImage() {
+            currentImageIndex = (currentImageIndex - 1 + images.length) % images.length;
+            displayImages();
+        }
+
+        function nextImage() {
+            currentImageIndex = (currentImageIndex + 1) % images.length;
+            displayImages();
+        }
+
+        function setCurrentImage(index) {
+            currentImageIndex = index;
+            displayImages();
+        }
+
+        // Handle inquiry form submission
+        document.getElementById('inquiryForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            if (!AuthManager.isAuthenticated()) {
+                alert('Debes iniciar sesión para enviar una consulta');
+                window.location.href = 'login.html';
+                return;
+            }
+
+            const formData = {
+                salonId: currentSalon.id,
+                fechaEvento: document.getElementById('eventDate').value,
+                numeroInvitados: parseInt(document.getElementById('guestCount').value),
+                mensaje: document.getElementById('message').value,
+            };
+
+            try {
+                const response = await AuthManager.fetchWithAuth(`${API_URL}/consultas`, {
+                    method: 'POST',
+                    body: JSON.stringify(formData),
+                });
+
+                const result = await response.json();
+
+                if (result.success) {
+                    alert('¡Consulta enviada correctamente! El proveedor se pondrá en contacto contigo.');
+                    document.getElementById('inquiryForm').reset();
+                } else {
+                    throw new Error(result.error || 'Error al enviar consulta');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Error al enviar la consulta. Por favor intenta de nuevo.');
+            }
+        });
+
+        // Handle favorite button
+        document.getElementById('favoriteBtn').addEventListener('click', async () => {
+            if (!AuthManager.isAuthenticated()) {
+                alert('Debes iniciar sesión para agregar a favoritos');
+                window.location.href = 'login.html';
+                return;
+            }
+
+            alert('Función de favoritos en desarrollo');
+        });
+
+        // Load salon on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            loadSalonDetails();
+        });
+    </script>
+</body>
+
+</html>

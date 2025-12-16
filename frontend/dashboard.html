@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard de Proveedor - TuSalón</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <a href="index.html" class="logo">TuSalón</a>
+            <div class="nav-links">
+                <a href="index.html">Inicio</a>
+                <a href="salones.html">Salones</a>
+                <a href="servicios.html">Servicios</a>
+            </div>
+            <div class="nav-actions">
+                <a href="login.html" class="btn btn-outline">Ingresar</a>
+                <a href="register.html" class="btn btn-primary">Registrarse</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Dashboard Header -->
+    <section class="dashboard-header">
+        <div class="container">
+            <h1 class="dashboard-title">Panel de Proveedor</h1>
+            <p class="dashboard-subtitle">Gestiona tus publicaciones de salones y servicios</p>
+        </div>
+    </section>
+
+    <!-- Dashboard Content -->
+    <section class="dashboard-content">
+        <div class="container">
+            <!-- Dashboard Tabs -->
+            <div class="dashboard-tabs">
+                <button class="dashboard-tab active" data-tab="salones">
+                    <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4">
+                        </path>
+                    </svg>
+                    Mis Salones
+                </button>
+                <button class="dashboard-tab" data -tab="servicios">
+                    <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z">
+                        </path>
+                    </svg>
+                    Mis Servicios
+                </button>
+            </div>
+
+            <!-- Salones Tab Content -->
+            <div class="tab-content active" id="salonesTab">
+                <div class="tab-header">
+                    <h2>Mis Salones</h2>
+                    <button class="btn btn-primary" onclick="showAddSalonForm()">
+                        <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4">
+                            </path>
+                        </svg>
+                        Agregar Salón
+                    </button>
+                </div>
+
+                <div id="salonesLoading" class="loading">Cargando salones...</div>
+                <div id="salonesGrid" class="dashboard-grid"></div>
+            </div>
+
+            <!-- Servicios Tab Content -->
+            <div class="tab-content" id="serviciosTab">
+                <div class="tab-header">
+                    <h2>Mis Servicios</h2>
+                    <button class="btn btn-primary" onclick="showAddServiceForm()">
+                        <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4">
+                            </path>
+                        </svg>
+                        Agregar Servicio
+                    </button>
+                </div>
+
+                <div id="serviciosLoading" class="loading">Cargando servicios...</div>
+                <div id="serviciosGrid" class="dashboard-grid"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modal for Add/Edit Salon -->
+    <div id="salonModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="salonModalTitle">Agregar Salón</h2>
+                <button class="modal-close" onclick="closeSalonModal()">&times;</button>
+            </div>
+            <form id="salonForm" class="modal-form">
+                <input type="hidden" id="salonId" name="id">
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="salonNombre">Nombre del Salón *</label>
+                        <input type="text" id="salonNombre" name="nombre" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="salonDescripcion">Descripción</label>
+                        <textarea id="salonDescripcion" name="descripcion" rows="4"></textarea>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="salonDireccion">Dirección *</label>
+                        <input type="text" id="salonDireccion" name="direccion" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="salonCiudad">Ciudad *</label>
+                        <input type="text" id="salonCiudad" name="ciudad" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="salonProvincia">Provincia *</label>
+                        <input type="text" id="salonProvincia" name="provincia" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="salonPais">País</label>
+                        <input type="text" id="salonPais" name="pais" value="Argentina">
+                    </div>
+                    <div class="form-group">
+                        <label for="salonCodigoPostal">Código Postal</label>
+                        <input type="text" id="salonCodigoPostal" name="codigoPostal">
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="salonLatitud">Latitud *</label>
+                        <input type="number" id="salonLatitud" name="latitud" step="any" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="salonLongitud">Longitud *</label>
+                        <input type="number" id="salonLongitud" name="longitud" step="any" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="salonCapacidad">Capacidad (personas)</label>
+                        <input type="number" id="salonCapacidad" name="capacidad" min="1">
+                    </div>
+                    <div class="form-group">
+                        <label for="salonPrecioBase">Precio Base</label>
+                        <input type="number" id="salonPrecioBase" name="precioBase" min="0" step="0.01">
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="salonImagenes">URLs de Imágenes (separadas por comas)</label>
+                        <textarea id="salonImagenes" name="imagenes" rows="2"
+                            placeholder="https://ejemplo.com/imagen1.jpg, https://ejemplo.com/imagen2.jpg"></textarea>
+                        <small>Ingresa las URLs de las imágenes separadas por comas</small>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="salonServicios">Servicios Incluidos (separados por comas)</label>
+                        <textarea id="salonServicios" name="serviciosIncluidos" rows="2"
+                            placeholder="WiFi, Estacionamiento, Aire acondicionado"></textarea>
+                    </div>
+                </div>
+
+                <div class="modal-actions">
+                    <button type="button" class="btn btn-outline" onclick="closeSalonModal()">Cancelar</button>
+                    <button type="submit" class="btn btn-primary">Guardar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal for Add/Edit Service -->
+    <div id="serviceModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="serviceModalTitle">Agregar Servicio</h2>
+                <button class="modal-close" onclick="closeServiceModal()">&times;</button>
+            </div>
+            <form id="serviceForm" class="modal-form">
+                <input type="hidden" id="serviceId" name="id">
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="serviceTipo">Tipo de Servicio *</label>
+                        <select id="serviceTipo" name="tipo" required>
+                            <option value="">Selecciona un tipo</option>
+                            <option value="fotografia">Fotografía</option>
+                            <option value="dj">DJ</option>
+                            <option value="wedding_planner">Wedding Planner</option>
+                            <option value="catering">Catering</option>
+                            <option value="decoracion">Decoración</option>
+                            <option value="musica">Música</option>
+                            <option value="video">Video</option>
+                            <option value="flores">Flores</option>
+                            <option value="transporte">Transporte</option>
+                            <option value="animacion">Animación</option>
+                            <option value="otros">Otros</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="serviceNombre">Nombre del Servicio *</label>
+                        <input type="text" id="serviceNombre" name="nombre" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="serviceDescripcion">Descripción</label>
+                        <textarea id="serviceDescripcion" name="descripcion" rows="4"></textarea>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="serviceCiudad">Ciudad *</label>
+                        <input type="text" id="serviceCiudad" name="ciudad" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="serviceProvincia">Provincia *</label>
+                        <input type="text" id="serviceProvincia" name="provincia" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="servicePais">País</label>
+                        <input type="text" id="servicePais" name="pais" value="Argentina">
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="serviceLatitud">Latitud *</label>
+                        <input type="number" id="serviceLatitud" name="latitud" step="any" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="serviceLongitud">Longitud *</label>
+                        <input type="number" id="serviceLongitud" name="longitud" step="any" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="servicePrecio">Precio Desde</label>
+                        <input type="number" id="servicePrecio" name="precioDesde" min="0" step="0.01">
+                    </div>
+                    <div class="form-group">
+                        <label for="serviceExperiencia">Años de Experiencia</label>
+                        <input type="text" id="serviceExperiencia" name="experiencia">
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="serviceImagenes">URLs de Imágenes (separadas por comas)</label>
+                        <textarea id="serviceImagenes" name="imagenes" rows="2"
+                            placeholder="https://ejemplo.com/imagen1.jpg, https://ejemplo.com/imagen2.jpg"></textarea>
+                        <small>Ingresa las URLs de las imágenes separadas por comas</small>
+                    </div>
+                </div>
+
+                <div class="modal-actions">
+                    <button type="button" class="btn btn-outline" onclick="closeServiceModal()">Cancelar</button>
+                    <button type="submit" class="btn btn-primary">Guardar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 TuSalón. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <script src="js/auth.js"></script>
+    <script src="js/dashboard.js"></script>
+</body>
+
+</html>

@@ -111,7 +111,7 @@ function createVenueCard(salon) {
         `<div style="width: 100%; height: 100%; background: linear-gradient(135deg, #E5E5E5 0%, #6B6B6B 100%); display: flex; align-items: center; justify-content: center; color: white; font-size: 1.5rem; font-weight: 600;">${salon.nombre.substring(0, 2)}</div>`;
 
     return `
-        <a href="salon-detalle.html?id=${salon.id}" class="venue-card" style="text-decoration: none; color: inherit;">
+        <a href="salon-detail.html?id=${salon.id}" class="venue-card" style="text-decoration: none; color: inherit;">
             <div class="venue-image">
                 ${imagenHtml}
             </div>
@@ -256,7 +256,7 @@ function createServiceCard(servicio) {
         `<div style="width: 100%; height: 100%; background: linear-gradient(135deg, #D4AF37 0%, #B8941F 100%); display: flex; align-items: center; justify-content: center; color: white; font-size: 1.5rem; font-weight: 600;">${servicio.nombre.substring(0, 2)}</div>`;
 
     return `
-        <div class="venue-card">
+        <a href="servicio-detail.html?id=${servicio.id}" class="venue-card" style="text-decoration: none; color: inherit;">
             <div class="venue-image">
                 ${imagenHtml}
                 <div style="position: absolute; top: 1rem; right: 1rem; background: var(--color-gold); color: var(--color-black); padding: 0.5rem 1rem; border-radius: 999px; font-weight: 600; font-size: 0.85rem; text-transform: uppercase;">
@@ -282,7 +282,7 @@ function createServiceCard(servicio) {
                     <span class="venue-price-label">desde</span>
                 </div>
             </div>
-        </div>
+        </a>
     `;
 }
 
