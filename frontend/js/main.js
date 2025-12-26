@@ -1,5 +1,5 @@
-// TuSalón - Main JavaScript
-// API Configuration
+// TuSalón - Main JavaScript  
+// Version: 2025-12-23-16:36 - Fixed TypeError and added debug logging
 const API_URL = 'http://localhost:3000/api/v1';
 
 // ========================================
@@ -76,9 +76,10 @@ async function loadFeaturedVenues() {
         const response = await fetch(`${API_URL}/salones`);
         if (!response.ok) throw new Error('Error al cargar salones');
 
-        const salones = await response.json();
+        const result = await response.json();
+        const salones = result.data || result; // Handle both {data: []} and direct array
 
-        if (salones.length === 0) {
+        if (!salones || salones.length === 0) {
             container.innerHTML = '<p class="loading">No hay salones disponibles</p>';
             return;
         }
@@ -159,7 +160,8 @@ async function loadAllVenues(filters = {}) {
 
         if (!response.ok) throw new Error('Error al cargar salones');
 
-        let salones = await response.json();
+        const result = await response.json();
+        let salones = result.data || result; // Handle both {data: []} and direct array
 
         // Apply client-side filters
         if (filters.location) {
@@ -208,7 +210,8 @@ async function loadAllServices(filters = {}) {
 
         if (!response.ok) throw new Error('Error al cargar servicios');
 
-        let servicios = await response.json();
+        const result = await response.json();
+        let servicios = result.data || result; // Handle both {data: []} and direct array
 
         // Apply client-side filters
         if (filters.location) {
@@ -227,6 +230,9 @@ async function loadAllServices(filters = {}) {
             container.innerHTML = '<p class="loading">No se encontraron servicios con los criterios seleccionados</p>';
             return;
         }
+
+        console.log('Servicios cargados:', servicios.length);
+        console.log('Primer servicio:', servicios[0]);
 
         container.innerHTML = servicios.map(servicio => createServiceCard(servicio)).join('');
 
