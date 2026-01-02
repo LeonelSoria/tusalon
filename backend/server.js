@@ -18,6 +18,8 @@ const authRoutes = require('./routes/auth');
 const salonesRoutes = require('./routes/salones');
 const serviciosRoutes = require('./routes/servicios');
 const consultasRoutes = require('./routes/consultas');
+const perfilRoutes = require('./routes/perfil');
+const favoritosRoutes = require('./routes/favoritos');
 
 // Ruta de prueba
 app.get('/', (req, res) => {
@@ -30,6 +32,8 @@ app.get('/', (req, res) => {
             salones: '/api/v1/salones',
             servicios: '/api/v1/servicios',
             consultas: '/api/v1/consultas',
+            perfil: '/api/v1/perfil',
+            favoritos: '/api/v1/favoritos',
         },
     });
 });
@@ -57,6 +61,8 @@ app.use('/api/v1/auth', authRoutes);
 app.use('/api/v1/salones', salonesRoutes);
 app.use('/api/v1/servicios', serviciosRoutes);
 app.use('/api/v1/consultas', consultasRoutes);
+app.use('/api/v1/perfil', perfilRoutes);
+app.use('/api/v1/favoritos', favoritosRoutes);
 
 // Manejo de errores 404
 app.use((req, res) => {

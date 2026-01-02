@@ -10,38 +10,50 @@
 
 <body>
     <!-- Navigation -->
-    <nav class="navbar">
+    <nav class="navbar navbar-dark">
         <div class="container">
-            <a href="index.html" class="logo">
-                <img src="images/logo.png" alt="TuSalón">
-            </a>
-            <div class="nav-links">
-                <a href="index.html">Inicio</a>
-                <a href="salones.html">Salones</a>
-                <a href="servicios.html">Servicios</a>
-            </div>
-            <div class="nav-actions">
-                <a href="login.html" class="btn btn-outline">Ingresar</a>
-                <a href="register.html" class="btn btn-primary">Registrarse</a>
+            <div class="nav-content">
+                <a href="index.html" class="logo">
+                    <img src="images/logo.png" alt="TuSalón">
+                </a>
+                <ul class="nav-menu">
+                    <li><a href="index.html">Inicio</a></li>
+                    <li><a href="salones.html" class="active">Salones</a></li>
+                    <li><a href="#servicios.html">Proveedores</a></li>
+                    <li><a href="#contacto">Contacto</a></li>
+                </ul>
+                <div class="nav-actions">
+                    <a href="login.html" class="nav-user">
+                        <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+                        </svg>
+                        Inicie sesión/Regístrese
+                    </a>
+                </div>
             </div>
         </div>
     </nav>
 
-    <!-- Header Section -->
-    <section class="detail-hero">
+    <!-- Breadcrumb Navigation -->
+    <section class="breadcrumb-section">
         <div class="container">
-            <div class="detail-header">
-                <a href="salones.html" class="back-link">
-                    <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7">
-                        </path>
-                    </svg>
-                    <span>Salones</span>
-                </a>
-                <div class="detail-header-info">
-                    <h1 id="salonName" class="detail-title">Cargando...</h1>
-                    <div id="salonLocation" class="detail-subtitle"></div>
-                </div>
+            <nav class="breadcrumb">
+                <a href="index.html">Inicio</a>
+                <span class="breadcrumb-separator">/</span>
+                <a href="salones.html">Salones</a>
+                <span class="breadcrumb-separator">/</span>
+                <span id="breadcrumbSalon">Cargando...</span>
+            </nav>
+        </div>
+    </section>
+
+    <!-- Header Section -->
+    <section class="detail-header-section">
+        <div class="container">
+            <div class="detail-header-content">
+                <h1 id="salonName" class="salon-detail-title">Cargando...</h1>
+                <div id="salonLocation" class="salon-detail-location"></div>
             </div>
         </div>
     </section>
@@ -238,6 +250,9 @@
             document.getElementById('salonName').textContent = salon.nombre;
             document.getElementById('salonLocation').textContent = `${salon.ciudad}, ${salon.provincia}`;
 
+            // Update breadcrumb
+            document.getElementById('breadcrumbSalon').textContent = salon.nombre;
+
             // Images
             images = salon.imagenes ? JSON.parse(salon.imagenes) : ['https://via.placeholder.com/800x600?text=Sin+imagen'];
             displayImages();
@@ -274,6 +289,9 @@
                     ${salon.proveedor.telefono ? `<p>${salon.proveedor.telefono}</p>` : ''}
                 `;
             }
+
+            // Check if is favorite
+            checkIfFavorite();
         }
 
         // Display images in gallery
@@ -345,6 +363,9 @@
         });
 
         // Handle favorite button
+        let isFavorite = false;
+        let favoritoId = null;
+
         document.getElementById('favoriteBtn').addEventListener('click', async () => {
             if (!AuthManager.isAuthenticated()) {
                 alert('Debes iniciar sesión para agregar a favoritos');
@@ -352,8 +373,82 @@
                 return;
             }
 
-            alert('Función de favoritos en desarrollo');
+            await toggleFavorite();
         });
+
+        // Check if is favorite
+        async function checkIfFavorite() {
+            if (!AuthManager.isAuthenticated()) return;
+
+            try {
+                const response = await AuthManager.fetchWithAuth(`${API_URL}/favoritos/check/salon/${currentSalon.id}`);
+                const result = await response.json();
+
+                if (result.success) {
+                    isFavorite = result.isFavorite;
+                    favoritoId = result.favoritoId;
+                    updateHeartIcon();
+                }
+            } catch (error) {
+                console.error('Error al verificar favorito:', error);
+            }
+        }
+
+        // Toggle favorite
+        async function toggleFavorite() {
+            try {
+                if (isFavorite) {
+                    // Remove from favorites
+                    const response = await AuthManager.fetchWithAuth(`${API_URL}/favoritos/${favoritoId}`, {
+                        method: 'DELETE'
+                    });
+                    const result = await response.json();
+
+                    if (result.success) {
+                        isFavorite = false;
+                        favoritoId = null;
+                        updateHeartIcon();
+                        alert('Eliminado de favoritos');
+                    }
+                } else {
+                    // Add to favorites
+                    const response = await AuthManager.fetchWithAuth(`${API_URL}/favoritos`, {
+                        method: 'POST',
+                        body: JSON.stringify({
+                            tipoItem: 'salon',
+                            itemId: currentSalon.id
+                        })
+                    });
+                    const result = await response.json();
+
+                    if (result.success) {
+                        isFavorite = true;
+                        favoritoId = result.data.id;
+                        updateHeartIcon();
+                        alert('Agregado a favoritos');
+                    }
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Error al gestionar favorito');
+            }
+        }
+
+        // Update heart icon
+        function updateHeartIcon() {
+            const heartIcon = document.getElementById('heartIcon');
+            const favoriteText = document.getElementById('favoriteText');
+
+            if (isFavorite) {
+                heartIcon.setAttribute('fill', 'currentColor');
+                heartIcon.style.color = '#dc2626';
+                favoriteText.textContent = 'Quitar de Favoritos';
+            } else {
+                heartIcon.setAttribute('fill', 'none');
+                heartIcon.style.color = '';
+                favoriteText.textContent = 'Agregar a Favoritos';
+            }
+        }
 
         // Load salon on page load
         document.addEventListener('DOMContentLoaded', () => {

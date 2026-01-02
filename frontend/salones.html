@@ -17,21 +17,26 @@
 
 <body>
     <!-- Navigation -->
-    <nav class="navbar">
+    <nav class="navbar navbar-dark">
         <div class="container">
             <div class="nav-content">
                 <a href="index.html" class="logo">
                     <img src="images/logo.png" alt="TuSalón">
                 </a>
                 <ul class="nav-menu">
-                    <li><a href="salones.html" style="color: var(--color-gold);">Salones</a></li>
-                    <li><a href="servicios.html">Servicios</a></li>
-                    <li><a href="index.html#about">Nosotros</a></li>
-                    <li><a href="index.html#contact">Contacto</a></li>
+                    <li><a href="index.html">Inicio</a></li>
+                    <li><a href="salones.html" class="active">Salones</a></li>
+                    <li><a href="servicios.html">Proveedores</a></li>
+                    <li><a href="#contacto">Contacto</a></li>
                 </ul>
                 <div class="nav-actions">
-                    <button class="btn btn-outline">Ingresar</button>
-                    <button class="btn btn-primary">Publicar</button>
+                    <a href="login.html" class="nav-user">
+                        <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+                        </svg>
+                        Inicie sesión/Regístrese
+                    </a>
                 </div>
             </div>
         </div>
